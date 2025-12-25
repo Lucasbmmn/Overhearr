@@ -1,0 +1,85 @@
+name: 🐛 Bug Report
+description: Create a report to help to improve Overhearr
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+        Please ensure you have searched the [existing issues](https://github.com/lucasbmmn/overhearr/issues) before submitting to avoid duplicates.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: >-
+        Describe the issue you encountered.
+        Help us understand the issue by describing what you were trying to do on and what happened.
+        
+        Provide a clear and concise description  of the bug to help us to fix it faster.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Overhearr Version
+      description: What version of Overhearr are you running? (e.g., v0.1.0 or main branch commit hash)
+      placeholder: v0.1.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Describe the steps to reproduce the behavior.
+      placeholder: |
+        1. Go to [...]
+        2. Click on [...]
+        3. Scroll down to [...]
+        4. See error in [...]
+        ...
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: The OS that Overhearr Server is running on
+      placeholder: Ubuntu 22.10, Debian, Arch...etc
+    validations:
+      required: true
+
+  - type: dropdown
+    id: deployment
+    attributes:
+      label: Deployment Method
+      description: How are you hosting Overhearr?
+      options:
+        - Docker Compose
+        - Docker Standalone
+        - Local Development (Gradle/NPM)
+        - Other (Precise in Additional information section)
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log
+      description: |
+        Please provide relevant logs from the backend or frontend or database container.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional information
+      description: Add any other context about the problem here (e.g., Browser version, Device, OS).
+
+  - type: markdown
+    attributes:
+      value: Thank you for submitting the form

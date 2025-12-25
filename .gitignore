@@ -1,0 +1,23 @@
+### IDEs ###
+.idea/
+.vscode/
+*.iml
+
+### OS ###
+.DS_Store
+Thumbs.db
+
+### Backend (Java/Gradle) ###
+backend/build/
+backend/.gradle/
+backend/out/
+backend/logs/
+
+### Frontend (Node) ###
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+
+### Docker & Env ###
+.env
+postgres-data/

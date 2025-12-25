@@ -1,0 +1,10 @@
+services:
+  # --- Database ---
+  postgres:
+    ports:
+      - "${POSTGRES_PORT}:5432"
+
+  # --- Backend (Spring Boot) ---
+  backend:
+    ports:
+      - "${BACKEND_PORT}:8080"

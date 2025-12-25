@@ -1,0 +1,30 @@
+### Git and IDEs ###
+.git
+.gitignore
+.idea/
+.vscode/
+*.iml
+
+### OS ###
+.DS_Store
+Thumbs.db
+
+### Data and Logs ###
+postgres-data/
+logs/
+
+### Backend (Java/Gradle) ###
+backend/build/
+backend/.gradle/
+backend/out/
+backend/logs/
+
+### Frontend (Node) ###
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+frontend/logs/
+
+### Docker & Env ###
+.env
+.env.example
