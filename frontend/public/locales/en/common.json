@@ -1,0 +1,24 @@
+{
+  "app": {
+    "title": "Overhearr",
+    "loading": "Loading...",
+    "internal_server_error": "Internal server error",
+    "network_error": "Unable to reach the server."
+  },
+  "auth": {
+    "subtitle": "Sign in to your Overhearr account",
+    "identifier": "Identifier",
+    "identifier_placeholder": "Username or Email",
+    "password": "Password",
+    "password_placeholder": "Enter your password",
+    "sign_in": "Sign In",
+    "logout": "Logout",
+    "credential_error": "An error occurred",
+    "identifier_required": "Identifier is required",
+    "password_min_length": "Password must be at least 6 characters"
+  },
+  "dashboard": {
+    "welcome_user": "Welcome, <1>{{username}}</1>!",
+    "role_display": "Role: {{role}}"
+  }
+}

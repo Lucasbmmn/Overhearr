@@ -1,0 +1,24 @@
+{
+  "app": {
+    "title": "Overhearr",
+    "loading": "Chargement...",
+    "internal_server_error": "Erreur interne du serveur",
+    "network_error": "Impossible d'atteindre serveur."
+  },
+  "auth": {
+    "subtitle": "Connectez-vous à votre compte Overhearr",
+    "identifier": "Identifiant",
+    "identifier_placeholder": "Nom d'utilisateur ou Email",
+    "password": "Mot de passe",
+    "password_placeholder": "Entrez votre mot de passe",
+    "sign_in": "Se connecter",
+    "logout": "Déconnexion",
+    "credential_error": "Le nom d’utilisateur ou le mot de passe est incorrect.",
+    "identifier_required": "L'identifiant est requis",
+    "password_min_length": "Le mot de passe doit comporter au moins 8 caractères"
+  },
+  "dashboard": {
+    "welcome_user": "Bienvenue, <1>{{username}}</1> !",
+    "role_display": "Rôle : {{role}}"
+  }
+}

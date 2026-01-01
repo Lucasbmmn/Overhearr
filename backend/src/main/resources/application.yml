@@ -28,3 +28,19 @@ overhearr:
   spotify:
     client-id: ${SPOTIFY_CLIENT_ID}
     client-secret: ${SPOTIFY_CLIENT_SECRET}
+
+  default-admin:
+    username: ${DEFAULT_ADMIN_USERNAME}
+    password: ${DEFAULT_ADMIN_PASSWORD}
+
+  token:
+    jwt:
+      expiration: ${TOKEN_EXPIRATION:730d}
+      secret: ${APP_SECRET}
+
+  password:
+    encoder:
+      argon2:
+        memory: ${ARGON2_MEMORY:65536}
+        iterations: ${ARGON2_ITERATIONS:3}
+        parallelism: ${ARGON2_PARALLELISM:2}
