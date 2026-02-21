@@ -36,7 +36,8 @@ class JwtServiceImplTest {
 
     @Test
     void generateAccessToken_ShouldGenerateValidToken() {
-        String token = jwtService.generateAccessToken("testuser");
+        UUID userId = UUID.randomUUID();
+        String token = jwtService.generateAccessToken(userId.toString());
 
         assertNotNull(token);
         assertFalse(token.isEmpty());
@@ -44,17 +45,19 @@ class JwtServiceImplTest {
 
     @Test
     void extractUsername_ShouldReturnCorrectUsername() {
-        String token = jwtService.generateAccessToken("testuser");
-        String username = jwtService.extractUsername(token);
+        UUID userId = UUID.randomUUID();
+        String token = jwtService.generateAccessToken(userId.toString());
+        String actualId = jwtService.extractUserId(token);
 
-        assertEquals("testuser", username);
+        assertEquals(userId.toString(), actualId);
     }
 
     @Test
     void validateAccessToken_ShouldReturnTrue_ForValidToken() {
-        String token = jwtService.generateAccessToken("testuser");
+        UUID userId = UUID.randomUUID();
+        String token = jwtService.generateAccessToken(userId.toString());
         UserDetails userDetails = new CustomUserDetails(
-                new User(UUID.randomUUID(), "testuser", "email", "pass", UserRole.USER, Instant.now(), Instant.now())
+                new User(userId, "testuser", "email", "pass", UserRole.USER, Instant.now(), Instant.now())
         );
 
         assertTrue(jwtService.validateAccessToken(token, userDetails));
@@ -62,9 +65,11 @@ class JwtServiceImplTest {
 
     @Test
     void validateAccessToken_ShouldReturnFalse_ForWrongUser() {
-        String token = jwtService.generateAccessToken("testuser");
+        UUID userId = UUID.randomUUID();
+        String token = jwtService.generateAccessToken(userId.toString());
         UserDetails userDetails = new CustomUserDetails(
-                new User(UUID.randomUUID(), "otheruser", "email", "pass", UserRole.USER, Instant.now(), Instant.now())
+                new User(UUID.randomUUID(), "otheruser", "email", "pass", UserRole.USER, Instant.now(),
+                        Instant.now())
         );
 
         assertFalse(jwtService.validateAccessToken(token, userDetails));
@@ -75,10 +80,11 @@ class JwtServiceImplTest {
         ReflectionTestUtils.setField(jwtService, "tokenSecret", TEST_SECRET);
         ReflectionTestUtils.setField(jwtService, "tokenExpiration", Duration.ofSeconds(-1));
 
-        String token = jwtService.generateAccessToken("testuser");
+        UUID userId = UUID.randomUUID();
+        String token = jwtService.generateAccessToken(userId.toString());
 
         UserDetails userDetails = new CustomUserDetails(
-                new User(UUID.randomUUID(), "testuser", "email", "pass", UserRole.USER, Instant.now(), Instant.now())
+                new User(userId, "testuser", "email", "pass", UserRole.USER, Instant.now(), Instant.now())
         );
 
         assertFalse(jwtService.validateAccessToken(token, userDetails));

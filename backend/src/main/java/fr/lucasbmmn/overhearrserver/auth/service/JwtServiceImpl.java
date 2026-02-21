@@ -33,14 +33,14 @@ public class JwtServiceImpl implements JwtService {
     private String tokenSecret;
 
     @Override
-    public String extractUsername(String token) {
+    public String extractUserId(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
     @Override
-    public String generateAccessToken(String username) {
+    public String generateAccessToken(String userId) {
         return Jwts.builder()
-                .subject(username)
+                .subject(userId)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + tokenExpiration.toMillis()))
                 .signWith(this.getSigningKey())
@@ -50,8 +50,8 @@ public class JwtServiceImpl implements JwtService {
     @Override
     public boolean validateAccessToken(String token, UserDetails userDetails) {
         try {
-            final String username = extractUsername(token);
-            return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+            final String userId = this.extractUserId(token);
+            return userId.equals(userDetails.getUsername()) && !isTokenExpired(token);
         } catch (JwtException e) {
             return false;
         }

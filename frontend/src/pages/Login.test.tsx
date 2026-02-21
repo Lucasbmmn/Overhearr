@@ -33,9 +33,9 @@ describe('Login Component', () => {
         );
 
         expect(screen.getByText('app.title')).toBeInTheDocument();
-        expect(screen.getByPlaceholderText('auth.identifier_placeholder')).toBeInTheDocument();
-        expect(screen.getByPlaceholderText('auth.password_placeholder')).toBeInTheDocument();
-        expect(screen.getByRole('button', {name: 'auth.sign_in'})).toBeInTheDocument();
+        expect(screen.getByPlaceholderText('auth:identifier_placeholder')).toBeInTheDocument();
+        expect(screen.getByPlaceholderText('auth:password_placeholder')).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: 'auth:sign_in' })).toBeInTheDocument();
     });
 
     it('submits the form with credentials', async () => {
@@ -48,15 +48,15 @@ describe('Login Component', () => {
         );
 
         // Fill in inputs
-        fireEvent.change(screen.getByPlaceholderText('auth.identifier_placeholder'), {
+        fireEvent.change(screen.getByPlaceholderText('auth:identifier_placeholder'), {
             target: { value: 'user' },
         });
-        fireEvent.change(screen.getByPlaceholderText('auth.password_placeholder'), {
+        fireEvent.change(screen.getByPlaceholderText('auth:password_placeholder'), {
             target: { value: 'password123' },
         });
 
         // Click submit
-        fireEvent.click(screen.getByRole('button', { name: 'auth.sign_in' }));
+        fireEvent.click(screen.getByRole('button', { name: 'auth:sign_in' }));
 
         // Verify store login was called
         await waitFor(() => {
@@ -74,7 +74,7 @@ describe('Login Component', () => {
             </BrowserRouter>
         );
 
-        fireEvent.click(screen.getByRole('button', { name: 'auth.sign_in' }));
+        fireEvent.click(screen.getByRole('button', { name: 'auth:sign_in' }));
 
         expect(mockLogin).not.toHaveBeenCalled();
     });

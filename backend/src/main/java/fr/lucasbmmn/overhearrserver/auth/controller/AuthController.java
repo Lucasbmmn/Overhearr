@@ -43,10 +43,10 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> loginUser(@Valid @RequestBody LoginRequest request,
                                                   HttpServletResponse httpResponse) {
-        AuthResponse authResponse = authService.login(request.getIdentifier(), request.getPassword());
+        AuthResponse authResponse = authService.login(request.identifier(), request.password());
         httpResponse.setHeader(
                 "Set-Cookie",
-                createTokenCookie(authResponse.getAccessToken(), tokenExpiration)
+                createTokenCookie(authResponse.accessToken(), tokenExpiration)
         );
         return ResponseEntity.ok(authResponse);
     }

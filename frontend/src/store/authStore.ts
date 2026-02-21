@@ -14,6 +14,7 @@ interface AuthState {
     login: (credentials: LoginRequest) => Promise<void>;
     logout: () => void;
     clearError: () => void;
+    setUser: (user: User) => void;
 }
 
 export const createAuthStore = (authService: IAuthService) => create<AuthState>()(
@@ -35,13 +36,12 @@ export const createAuthStore = (authService: IAuthService) => create<AuthState>(
                     });
                 } catch (err) {
                     let key = 'app.internal_server_error';
-                    console.log(err);
 
                     if (axios.isAxiosError(err)) {
                         if (err.response) {
                             const status = err.response.status;
                             if (status === 401) {
-                                key = 'auth.credential_error';
+                                key = 'auth:credential_error';
                             } else if (status >= 500) {
                                 key = 'app.internal_server_error';
                             }
@@ -67,6 +67,8 @@ export const createAuthStore = (authService: IAuthService) => create<AuthState>(
             },
 
             clearError: () => set({ errorKey: null }),
+
+            setUser: (user: User) => set({ user }),
         }),
         {
             name: 'overhearr_authenticated',

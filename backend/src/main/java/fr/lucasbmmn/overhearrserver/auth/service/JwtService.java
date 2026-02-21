@@ -10,24 +10,24 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 public interface JwtService {
     /**
-     * Extracts the username (subject) from the provided JWT token.
+     * Extracts the user id (subject) from the provided JWT token.
      *
      * @param token The JWT string.
      * @return The username stored in the token's subject claim.
      */
-    String extractUsername(String token);
+    String extractUserId(String token);
 
     /**
-     * Generates a new access token for a given username.
+     * Generates a new access token for a given id.
      *
-     * @param username The username to include in the token.
+     * @param userId The id to include in the token.
      * @return A JWT access token string.
      */
-    String generateAccessToken(String username);
+    String generateAccessToken(String userId);
 
     /**
      * Validates an access token against user details.
-     * Checks for matching username, token expiration, and correct token type.
+     * Checks for matching id, token expiration, and correct token type.
      *
      * @param token       The access token to validate.
      * @param userDetails The user details to validate against.

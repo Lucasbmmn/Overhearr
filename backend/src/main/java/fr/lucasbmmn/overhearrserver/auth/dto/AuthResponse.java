@@ -1,22 +1,14 @@
 package fr.lucasbmmn.overhearrserver.auth.dto;
 
 import fr.lucasbmmn.overhearrserver.user.dto.UserResponse;
-import lombok.Builder;
-import lombok.Data;
 
 /**
  * DTO for the successful authentication response.
+ *
+ * @param accessToken The JSON Web Token (JWT) used for accessing protected resources.
+ * @param user        The details of the authenticated user.
  */
-@Data
-@Builder
-public class AuthResponse {
-    /**
-     * The JSON Web Token (JWT) used for accessing protected resources.
-     */
-    private String accessToken;
-
-    /**
-     * The details of the authenticated user.
-     */
-    private UserResponse user;
-}
+public record AuthResponse(
+        String accessToken,
+        UserResponse user
+) {}
