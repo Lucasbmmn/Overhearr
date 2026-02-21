@@ -23,6 +23,14 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     Optional<User> findByUsername(@NonNull String username);
 
     /**
+     * Retrieves a user by their specific email.
+     *
+     * @param email The email to search for.
+     * @return An {@link Optional} containing the User if found.
+     */
+    Optional<User> findByEmail(@NonNull String email);
+
+    /**
      * Retrieves a user who matches either the given username OR the given email.
      *
      * @param username The username to match.

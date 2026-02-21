@@ -22,7 +22,6 @@ import org.springframework.stereotype.Component;
 public class AdminSeeder implements CommandLineRunner {
 
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
 
     @Value("${overhearr.default-admin.username}")
     private String defaultAdminUsername;
@@ -38,10 +37,11 @@ public class AdminSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) {
         if (userService.findByUsername(this.defaultAdminUsername).isEmpty()) {
-            UserCreationRequest admin = new UserCreationRequest();
-            admin.setUsername(this.defaultAdminUsername);
-            admin.setPassword(passwordEncoder.encode(this.defaultAdminPassword));
-            admin.setRole(UserRole.ADMIN);
+            UserCreationRequest admin = new UserCreationRequest(
+                    this.defaultAdminUsername,
+                    this.defaultAdminPassword,
+                    UserRole.ADMIN
+            );
 
             this.userService.createUser(admin);
         }
