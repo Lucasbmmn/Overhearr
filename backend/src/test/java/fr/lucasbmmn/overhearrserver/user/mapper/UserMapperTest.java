@@ -18,11 +18,12 @@ class UserMapperTest {
 
     @Test
     void toEntity_ShouldMapFieldsAndApplyConstants() {
-        UserCreationRequest request = new UserCreationRequest();
-        request.setUsername("testuser");
-        request.setEmail("test@example.com");
-        request.setPassword("Password");
-        request.setRole(UserRole.ADMIN);
+        UserCreationRequest request = new UserCreationRequest(
+                "testuser",
+                "test@example.com",
+                "Password",
+                UserRole.ADMIN
+        );
 
         User user = mapper.toEntity(request);
 
@@ -49,12 +50,11 @@ class UserMapperTest {
 
         UserResponse response = mapper.toResponse(user);
 
-        // Then
-        assertEquals(user.getId(), response.getId());
-        assertEquals(user.getUsername(), response.getUsername());
-        assertEquals(user.getEmail(), response.getEmail());
-        assertEquals(user.getRole(), response.getRole());
-        assertEquals(user.getCreatedAt(), response.getCreatedAt());
-        assertEquals(user.getUpdatedAt(), response.getUpdatedAt());
+        assertEquals(user.getId(), response.id());
+        assertEquals(user.getUsername(), response.username());
+        assertEquals(user.getEmail(), response.email());
+        assertEquals(user.getRole(), response.role());
+        assertEquals(user.getCreatedAt(), response.createdAt());
+        assertEquals(user.getUpdatedAt(), response.updatedAt());
     }
 }

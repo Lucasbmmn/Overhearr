@@ -1,26 +1,26 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { isAxiosError } from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { Lock, User as UserIcon, AlertCircle, Loader2, Eye, EyeOff } from 'lucide-react';
+import { Lock, User as UserIcon, AlertCircle, Loader2 } from 'lucide-react';
 import { z } from 'zod';
 import LanguagePicker from '../components/LanguagePicker';
+import SecretInput from '../components/ui/SecretInput';
 import { useAuthStore } from '../store/authStore';
 
 const loginSchema = z.object({
-    identifier: z.string().min(1, 'auth.identifier_required'),
-    password: z.string().min(8, 'auth.password_min_length'),
+    identifier: z.string(),
+    password: z.string(),
 });
 
 type LoginFormInputs = z.infer<typeof loginSchema>;
 
 const Login = () => {
-    const { t } = useTranslation();
+    const { t } = useTranslation(['common', 'auth']);
     const navigate = useNavigate();
     const { login, isLoading, errorKey, clearError } = useAuthStore();
-    const [showPassword, setShowPassword] = useState(false);
 
     const {
         register,
@@ -62,7 +62,7 @@ const Login = () => {
 
                 <div className="text-center mb-8">
                     <h1 className="text-5xl font-bold text-indigo-500">{t("app.title")}</h1>
-                    <p className="text-gray-400 mt-2">{t("auth.subtitle")}</p>
+                    <p className="text-gray-400 mt-2">{t("auth:subtitle")}</p>
                 </div>
 
                 {errorKey && (
@@ -74,7 +74,7 @@ const Login = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                     <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-2">{t("auth.identifier")}</label>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">{t("auth:identifier")}</label>
                         <div className="relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <UserIcon className="h-5 w-5 text-gray-500" />
@@ -85,38 +85,20 @@ const Login = () => {
                                 name="identifier"
                                 required
                                 className="block w-full pl-10 pr-3 py-2.5 bg-gray-900 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500  focus:border-transparent"
-                                placeholder={t("auth.identifier_placeholder")}
+                                placeholder={t("auth:identifier_placeholder")}
                             />
                         </div>
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium text-gray-300 mb-2">{t("auth.password")}</label>
-                        <div className="relative">
-                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <Lock className="h-5 w-5 text-gray-500" />
-                            </div>
-                            <input
-                                {...register("password")}
-                                type={showPassword ? "text" : "password"}
-                                name="password"
-                                required
-                                className="block w-full pl-10 pr-10 py-2.5 bg-gray-900 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent placeholder-gray-500"
-                                placeholder={t("auth.password_placeholder")}
-                            />
-                            <button
-                                type="button"
-                                onClick={() => setShowPassword(!showPassword)}
-                                className="absolute inset-y-0 right-0 px-3 cursor-pointer bg-indigo-600 hover:bg-indigo-600 text-white rounded-r-lg transition-colors focus:outline-none flex items-center justify-center border border-indigo-500"
-                                tabIndex={-1}
-                            >
-                                {showPassword ? (
-                                    <EyeOff className="h-5 w-5" />
-                                ) : (
-                                    <Eye className="h-5 w-5" />
-                                )}
-                            </button>
-                        </div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">{t("auth:password")}</label>
+                        <SecretInput
+                            {...register("password")}
+                            leftIcon={<Lock className="h-5 w-5 text-gray-500" />}
+                            required
+                            className="block w-full py-2.5 bg-gray-900 border border-gray-600 rounded-lg text-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent placeholder-gray-500"
+                            placeholder={t("auth:password_placeholder")}
+                        />
                     </div>
 
                     <button
@@ -124,7 +106,7 @@ const Login = () => {
                         disabled={isLoading}
                         className="w-full flex justify-center py-2.5 px-4 cursor-pointer rounded-lg shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-400 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                     >
-                        {isLoading ? <Loader2 className="animate-spin h-5 w-5" /> : t("auth.sign_in")}
+                        {isLoading ? <Loader2 className="animate-spin h-5 w-5" /> : t("auth:sign_in")}
                     </button>
                 </form>
             </div>

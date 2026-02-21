@@ -1,24 +1,44 @@
 {
   "app": {
-    "title": "Overhearr",
-    "loading": "Chargement...",
     "internal_server_error": "Erreur interne du serveur",
-    "network_error": "Impossible d'atteindre serveur."
+    "loading": "Chargement...",
+    "network_error": "Impossible d'atteindre serveur.",
+    "title": "Overhearr"
   },
-  "auth": {
-    "subtitle": "Connectez-vous à votre compte Overhearr",
-    "identifier": "Identifiant",
-    "identifier_placeholder": "Nom d'utilisateur ou Email",
-    "password": "Mot de passe",
-    "password_placeholder": "Entrez votre mot de passe",
-    "sign_in": "Se connecter",
-    "logout": "Déconnexion",
-    "credential_error": "Le nom d’utilisateur ou le mot de passe est incorrect.",
-    "identifier_required": "L'identifiant est requis",
-    "password_min_length": "Le mot de passe doit comporter au moins 8 caractères"
+  "common": {
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "create": "Créer",
+    "delete": "Supprimer",
+    "save": "Enregistrer",
+    "update": "Mettre à jour"
   },
-  "dashboard": {
-    "welcome_user": "Bienvenue, <1>{{username}}</1> !",
-    "role_display": "Rôle : {{role}}"
+  "components": {
+    "layout": {
+      "search_bar": {
+        "search_place_holder": "Rechercher une chanson, un album ou un artiste"
+      },
+      "sidebar": {
+        "discover": "Découvrir",
+        "users": "Utilisateurs"
+      },
+      "user_dropdown": {
+        "logout": "Se déconnecter",
+        "settings": "Paramètres"
+      }
+    }
+  },
+  "validation": {
+    "current_password_required": "Le mot de passe actuel est requis",
+    "email_invalid": "Adresse email invalide",
+    "password_confirm": "Les mots de passe ne correspondent pas",
+    "password_digit": "Le mot de passe doit contenir au moins un chiffre",
+    "password_length": "Le mot de passe doit contenir au moins 8 caractères",
+    "password_lowercase": "Le mot de passe doit contenir au moins une minuscule",
+    "password_special": "Le mot de passe doit contenir au moins un caractère spécial (@$!%*?&)",
+    "password_uppercase": "Le mot de passe doit contenir au moins une majuscule",
+    "required": "Ce champs est requit",
+    "username_length": "Le nom d'utilisateur doit contenir au moins 3 caractères",
+    "username_pattern": "Le nom d'utilisateur doit commencer/finir avec des caractères alphanumériques et ne doit pas contenir de points/tiret-bas consécutifs"
   }
 }

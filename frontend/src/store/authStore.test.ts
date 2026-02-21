@@ -27,8 +27,10 @@ describe('authStore', () => {
     });
 
     it('should handle successful login', async () => {
-        const mockUser: User = { id: 'userId', username: 'testuser', email: 'test@test.com', role: UserRole.USER,
-            createdAt: '2026-01-01T14:45:06.167Z', updatedAt: '2026-01-01T14:45:06.167Z' };
+        const mockUser: User = {
+            id: 'userId', username: 'testuser', email: 'test@test.com', role: UserRole.USER,
+            createdAt: '2026-01-01T14:45:06.167Z', updatedAt: '2026-01-01T14:45:06.167Z'
+        };
         const mockResponse: AuthResponse = { accessToken: 'accessToken', user: mockUser };
 
         mockAuthService.login.mockResolvedValue(mockResponse);
@@ -67,6 +69,6 @@ describe('authStore', () => {
         expect(state.user).toBeNull();
         expect(state.isAuthenticated).toBe(false);
         expect(state.isLoading).toBe(false);
-        expect(state.errorKey).toBe('auth.credential_error');
+        expect(state.errorKey).toBe('auth:credential_error');
     });
 })

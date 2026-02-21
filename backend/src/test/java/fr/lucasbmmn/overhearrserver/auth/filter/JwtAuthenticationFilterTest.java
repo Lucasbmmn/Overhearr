@@ -53,20 +53,21 @@ class JwtAuthenticationFilterTest {
     @Test
     void doFilterInternal_ValidToken_AuthenticatesUser() throws ServletException, IOException {
         String token = "valid.token";
-        String username = "testuser";
+        UUID userId = UUID.randomUUID();
+        String userIdString = userId.toString();
         UserDetails userDetails = new CustomUserDetails(
-                new User(UUID.randomUUID(), "testuser", "email", "pass", UserRole.USER, Instant.now(), Instant.now())
+                new User(userId, "testuser", "email", "pass", UserRole.USER, Instant.now(), Instant.now())
         );
 
         when(tokenExtractor.extract(request)).thenReturn(token);
-        when(jwtService.extractUsername(token)).thenReturn(username);
-        when(userDetailsService.loadUserByUsername(username)).thenReturn(userDetails);
+        when(jwtService.extractUserId(token)).thenReturn(userIdString);
+        when(userDetailsService.loadUserByUsername(userIdString)).thenReturn(userDetails);
         when(jwtService.validateAccessToken(token, userDetails)).thenReturn(true);
 
         jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
 
         assertNotNull(SecurityContextHolder.getContext().getAuthentication());
-        assertEquals(username, SecurityContextHolder.getContext().getAuthentication().getName());
+        assertEquals(userIdString, SecurityContextHolder.getContext().getAuthentication().getName());
 
         verify(filterChain).doFilter(request, response);
     }
@@ -87,7 +88,7 @@ class JwtAuthenticationFilterTest {
         String username = "testuser";
 
         when(tokenExtractor.extract(request)).thenReturn(token);
-        when(jwtService.extractUsername(token)).thenReturn(username);
+        when(jwtService.extractUserId(token)).thenReturn(username);
         // Simulate validation failure
         when(userDetailsService.loadUserByUsername(username))
                 .thenReturn(new CustomUserDetails(

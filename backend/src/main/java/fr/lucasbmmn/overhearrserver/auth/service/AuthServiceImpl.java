@@ -11,6 +11,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+/**
+ * Implementation of the {@link AuthService}.
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
@@ -22,18 +25,15 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public AuthResponse login(@NonNull String identifier, @NonNull String password) {
-        User user = userService.findByUsernameOrEmail(identifier )
+        User user = userService.findByUsernameOrEmail(identifier)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + identifier));
 
         if (!passwordEncoder.matches(password, user.getPasswordHash())) {
             throw new BadCredentialsException("Invalid credentials");
         }
 
-        String token = jwtService.generateAccessToken(user.getUsername());
+        String token = jwtService.generateAccessToken(user.getId().toString());
 
-        return AuthResponse.builder()
-                .accessToken(token)
-                .user(userMapper.toResponse(user))
-                .build();
+        return new AuthResponse(token, userMapper.toResponse(user));
     }
 }

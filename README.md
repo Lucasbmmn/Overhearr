@@ -22,7 +22,7 @@
 
 ## Project Status
 
-🚧 **This project is currently in the scaffolding phase.** The backend and frontend structures are set up with Docker, but the core logic for requests and authentication is currently being implemented.
+🚧 **This project is currently in early development.** The backend, frontend, and database structures are set up with Docker. User management and authentication are complete, while the core logic for requests is currently being implemented.
 
 ### Features (MVP)
 * **Request System:** Seamlessly search and request music using metadata from Spotify, Deezer, MusicBrainz, and Last.fm.
@@ -33,7 +33,7 @@
 ## Roadmap
 
 **Phase 1: MVP (In Progress)**
-* [ ] **Authentication:** Admin-managed user creation with JWT token-based login.
+* [x] **Authentication:** Admin-managed user creation with JWT token-based login.
 * [ ] **Request System:** Search and request music using metadata from Spotify/Deezer.
 * [ ] **Dashboard:** Responsive UI to track request status.
 * [X] **Infrastructure:** Docker Compose setup with PostgreSQL, Spring Boot, and React.
@@ -111,12 +111,15 @@ npm run dev
 
 Crucial environment variables for `.env`:
 
-| Variable                | Description                |
-|-------------------------|----------------------------|
-| `POSTGRES_USER`         | PostgreSQL Username        |
-| `POSTGRES_PASSWORD`     | PostgreSQL Password        |
-| `SPOTIFY_CLIENT_ID`     | Your Spotify API Client ID |
-| `SPOTIFY_CLIENT_SECRET` | Your Spotify API Secret    |
+| Variable                   | Description                               |
+|----------------------------|-------------------------------------------|
+| `POSTGRES_USER`            | PostgreSQL Username                       |
+| `POSTGRES_PASSWORD`        | PostgreSQL Password                       |
+| `SPOTIFY_CLIENT_ID`        | Your Spotify API Client ID                |
+| `SPOTIFY_CLIENT_SECRET`    | Your Spotify API Secret                   |
+| `APP_SECRET`               | Secret for generated JWT tokens           |
+| `DEFAULT_ADMIN_USERNAME`   | Username for the default admin account    |
+| `DEFAULT_ADMIN_PASSWORD`   | Password for the default admin account    |
 
 ## Contributing
 

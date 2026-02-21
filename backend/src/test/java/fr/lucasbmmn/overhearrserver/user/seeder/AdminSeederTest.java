@@ -24,8 +24,6 @@ class AdminSeederTest {
 
     @Mock
     private UserService userService;
-    @Mock
-    private PasswordEncoder passwordEncoder;
 
     @InjectMocks
     private AdminSeeder adminSeeder;
@@ -39,7 +37,6 @@ class AdminSeederTest {
     @Test
     void run_AdminExist_ShouldCreateAdmin() {
         when(userService.findByUsername("admin")).thenReturn(Optional.empty());
-        when(passwordEncoder.encode("password")).thenReturn("hashPass");
 
         adminSeeder.run();
 

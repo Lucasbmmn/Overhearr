@@ -1,0 +1,31 @@
+{
+  "create_user": "Créer un utilisateur",
+  "delete_confirm": "Voulez-vous vraiment supprimer cet utilisateur ? Toutes les données de demande de cet utilisateur seront supprimées de façon permanente.",
+  "delete_user": "Supprimer l'utilisateur",
+  "edit": {
+    "email": "E-mail",
+    "role": "Rôle",
+    "username": "Nom d'utilisateur"
+  },
+  "password": "Mot de passe",
+  "title": "Utilisateurs",
+  "user_header": {
+    "join_date": "Membre depuis le {{joinDate}}"
+  },
+  "user_table": {
+    "admin": "Administrateur",
+    "create_user": "Créer un nouvel utilisateur",
+    "created": "À rejoint",
+    "delete": "Supprimer",
+    "edit": "Édition",
+    "edit_user": "Modifier un utilisateur",
+    "pagination": {
+      "next": "Suivant",
+      "previous": "Précédent",
+      "results_per_page": "Affichage de <1 /> résultats par pages",
+      "showing_results": "Affichage de {{from}} à {{to}} pour {{total}} résultats"
+    },
+    "role": "Rôle",
+    "user": "Utilisateur"
+  }
+}

@@ -28,29 +28,31 @@ class CustomUserDetailsServiceTest {
 
     @Test
     void loadUserByUsername_Success() {
+        UUID userId = UUID.randomUUID();
         User user = new User();
-        user.setId(UUID.randomUUID());
+        user.setId(userId);
         user.setUsername("testuser");
         user.setPasswordHash("hashedPass");
         user.setRole(UserRole.USER);
 
-        when(userRepository.findByUsernameOrEmail("testuser", "testuser"))
+        when(userRepository.findById(userId))
                 .thenReturn(Optional.of(user));
 
-        UserDetails userDetails = customUserDetailsService.loadUserByUsername("testuser");
+        UserDetails userDetails = customUserDetailsService.loadUserByUsername(userId.toString());
 
         assertNotNull(userDetails);
-        assertEquals("testuser", userDetails.getUsername());
+        assertEquals(userId.toString(), userDetails.getUsername());
         assertEquals("hashedPass", userDetails.getPassword());
     }
 
     @Test
     void loadUserByUsername_NotFound_ThrowsException() {
-        when(userRepository.findByUsernameOrEmail("unknown", "unknown"))
+        UUID unknownId = UUID.randomUUID();
+
+        when(userRepository.findById(unknownId))
                 .thenReturn(Optional.empty());
 
-        assertThrows(UsernameNotFoundException.class, () ->
-                customUserDetailsService.loadUserByUsername("unknown")
-        );
+        assertThrows(UsernameNotFoundException.class,
+                () -> customUserDetailsService.loadUserByUsername(unknownId.toString()));
     }
 }

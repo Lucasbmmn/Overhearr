@@ -63,15 +63,15 @@ class AuthServiceImplTest {
     void login_Successful() {
         when(userService.findByUsernameOrEmail("testuser")).thenReturn(Optional.of(user));
         when(passwordEncoder.matches("password", "hashedPassword")).thenReturn(true);
-        when(jwtService.generateAccessToken("testuser")).thenReturn("token");
+        when(jwtService.generateAccessToken(user.getId().toString())).thenReturn("token");
         when(userMapper.toResponse(user)).thenReturn(userResponse);
 
         AuthResponse response = authService.login("testuser", "password");
 
         assertNotNull(response);
-        assertEquals("token", response.getAccessToken());
-        assertEquals("testuser", response.getUser().getUsername());
-        verify(jwtService).generateAccessToken("testuser");
+        assertEquals("token", response.accessToken());
+        assertEquals("testuser", response.user().username());
+        verify(jwtService).generateAccessToken(user.getId().toString());
     }
 
     @Test

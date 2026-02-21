@@ -51,18 +51,13 @@ class AuthControllerTest {
 
     @Test
     void loginUser_Successful() throws Exception {
-        LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setIdentifier("testuser");
-        loginRequest.setPassword("password");
+        LoginRequest loginRequest = new LoginRequest("testuser", "password");
 
         UserResponse userResponse = new UserResponse(
                 UUID.randomUUID(), "testuser", UserRole.USER, Instant.now(), Instant.now()
         );
 
-        AuthResponse authResponse = AuthResponse.builder()
-                .accessToken("token")
-                .user(userResponse)
-                .build();
+        AuthResponse authResponse = new AuthResponse("token", userResponse);
 
         when(authService.login(anyString(), anyString())).thenReturn(authResponse);
 
