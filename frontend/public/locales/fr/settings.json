@@ -1,0 +1,24 @@
+{
+  "general": {
+    "display_language": "Langue d'affichage",
+    "email": "E-mail",
+    "title": "Paramètres généraux",
+    "username": "Nom d'utilisateur"
+  },
+  "layout": {
+    "general": "Général",
+    "password": "Mot de passe"
+  },
+  "user_header": {
+    "join_date": "Membre depuis le {{joinDate}}"
+  },
+  "password": {
+    "confirm_password": "Confirmer le mot de passe",
+    "current_password": "Mot de passe actuel",
+    "new_password": "Nouveau mot de passe",
+    "subtitle": "Mettez à jour votre mot de passe pour protéger votre compte.",
+    "success": "Le mot de passe a été mis à jour",
+    "title": "Paramètres de mot de passe",
+    "update_button": "Modifier le mot de passe"
+  }
+}

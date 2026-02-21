@@ -1,0 +1,24 @@
+{
+  "general": {
+    "display_language": "Display language",
+    "email": "Email",
+    "title": "General Settings",
+    "username": "Username"
+  },
+  "layout": {
+    "general": "General",
+    "password": "Password"
+  },
+  "user_header": {
+    "join_date": "Joined since {{joinDate}}"
+  },
+  "password": {
+    "confirm_password": "Confirm Password",
+    "current_password": "Current Password",
+    "new_password": "New Password",
+    "subtitle": "Update your password to keep your account secure.",
+    "success": "Password updated successfully",
+    "title": "Password Settings",
+    "update_button": "Update Password"
+  }
+}
