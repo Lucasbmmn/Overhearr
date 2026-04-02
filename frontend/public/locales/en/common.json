@@ -16,7 +16,10 @@
   "components": {
     "layout": {
       "search_bar": {
-        "search_place_holder": "Search Songs, Albums and Artists"
+        "search_place_holder": "Search tracks, albums, artists...",
+        "searching": "Searching...",
+        "see_all": "See all results for \"{{query}}\"",
+        "no_results_for": "No results found for \"{{query}}\""
       },
       "sidebar": {
         "discover": "Discover",
@@ -40,5 +43,23 @@
     "required": "This field is required",
     "username_length": "Username must be at least 3 characters",
     "username_pattern": "Username must start/end with alphanumeric and contain no consecutive dots/underscores"
+  },
+  "search": {
+    "results_for": "Results for",
+    "discover_prompt": "Discover tracks, artists, and albums",
+    "no_results": "No results found",
+    "search_else": "Try searching for something else or check your spelling.",
+    "searching_for": "Searching for \"{{query}}\"...",
+    "tabs": {
+        "all": "All",
+        "tracks": "Tracks",
+        "artists": "Artists",
+        "albums": "Albums"
+    },
+    "meta": {
+        "results_count": "{{count}} results"
+    },
+    "no_more_results": "No more results",
+    "welcome": "Welcome to Overhearr! Use the search bar to find music."
   }
 }

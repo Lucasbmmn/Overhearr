@@ -25,10 +25,6 @@ spring:
     validate-on-migrate: true
 
 overhearr:
-  spotify:
-    client-id: ${SPOTIFY_CLIENT_ID}
-    client-secret: ${SPOTIFY_CLIENT_SECRET}
-
   default-admin:
     username: ${DEFAULT_ADMIN_USERNAME}
     password: ${DEFAULT_ADMIN_PASSWORD}
@@ -44,3 +40,7 @@ overhearr:
         memory: ${ARGON2_MEMORY:65536}
         iterations: ${ARGON2_ITERATIONS:3}
         parallelism: ${ARGON2_PARALLELISM:2}
+
+  providers:
+    deezer:
+      base-url: ${DEEZER_BASE_URL:https://api.deezer.com}

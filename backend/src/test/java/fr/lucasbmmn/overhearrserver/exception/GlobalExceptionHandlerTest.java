@@ -149,4 +149,17 @@ class GlobalExceptionHandlerTest {
         assertEquals(500, response.getBody().getStatus());
         assertEquals("An unexpected error occurred", response.getBody().getMessage());
     }
+
+    @Test
+    void handleBadGateway_Returns502() {
+        BadGatewayException ex = new BadGatewayException("Bad gateway occurred") {
+        };
+
+        ResponseEntity<ExceptionResponse> response = handler.handleBadGateway(ex, request);
+
+        assertEquals(HttpStatus.BAD_GATEWAY, response.getStatusCode());
+        assertNotNull(response.getBody());
+        assertEquals(502, response.getBody().getStatus());
+        assertEquals("Bad gateway occurred", response.getBody().getMessage());
+    }
 }

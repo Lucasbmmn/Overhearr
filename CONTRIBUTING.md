@@ -65,7 +65,7 @@ Thanks for your interest in contributing! here is everything you need to know to
 ### Commit Messages
 We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
-* `feat: add spotify search integration`
+* `feat: add deezer search integration`
 * `fix: resolve login cookie issue`
 * `docs: update readme with docker instructions`
 * `chore: bump spring boot version`

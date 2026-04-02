@@ -9,8 +9,10 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.Instant;
@@ -83,6 +85,48 @@ public class GlobalExceptionHandler {
                 .status(status.value())
                 .error(status.getReasonPhrase())
                 .message("Invalid parameter: " + e.getName())
+                .timestamp(Instant.now())
+                .path(request.getRequestURI())
+                .build(), status);
+    }
+
+    /**
+     * Handles missing request parameter errors.
+     *
+     * @param e       The missing-parameter exception.
+     * @param request The current HTTP request.
+     * @return A 400 Bad Request response.
+     */
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<ExceptionResponse> handleMissingParameter(MissingServletRequestParameterException e,
+            HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        return new ResponseEntity<>(ExceptionResponse.builder()
+                .status(status.value())
+                .error(status.getReasonPhrase())
+                .message("Missing parameter: " + e.getParameterName())
+                .timestamp(Instant.now())
+                .path(request.getRequestURI())
+                .build(), status);
+    }
+
+    /**
+     * Handles method-argument validation errors.
+     *
+     * @param e       The method-validation exception.
+     * @param request The current HTTP request.
+     * @return A 400 Bad Request response.
+     */
+    @ExceptionHandler(HandlerMethodValidationException.class)
+    public ResponseEntity<ExceptionResponse> handleMethodValidation(HandlerMethodValidationException e,
+            HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        return new ResponseEntity<>(ExceptionResponse.builder()
+                .status(status.value())
+                .error(status.getReasonPhrase())
+                .message("Validation failed: " + e.getReason())
                 .timestamp(Instant.now())
                 .path(request.getRequestURI())
                 .build(), status);
@@ -179,6 +223,21 @@ public class GlobalExceptionHandler {
                 .build();
 
         return new ResponseEntity<>(response, status);
+    }
+
+    /**
+     * Handles application-level bad gateway exceptions.
+     *
+     * @param e       The bad gateway exception.
+     * @param request The current HTTP request.
+     * @return A 502 Bad Gateway response.
+     */
+    @ExceptionHandler(BadGatewayException.class)
+    public ResponseEntity<ExceptionResponse> handleBadGateway(BadGatewayException e, HttpServletRequest request) {
+        log.error("An error occurred while calling external API", e);
+
+        HttpStatus status = HttpStatus.BAD_GATEWAY;
+        return new ResponseEntity<>(this.createExceptionResponse(e, request, status), status);
     }
 
     /**
