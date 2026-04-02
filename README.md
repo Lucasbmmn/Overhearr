@@ -25,7 +25,7 @@
 🚧 **This project is currently in early development.** The backend, frontend, and database structures are set up with Docker. User management and authentication are complete, while the core logic for requests is currently being implemented.
 
 ### Features (MVP)
-* **Request System:** Seamlessly search and request music using metadata from Spotify, Deezer, MusicBrainz, and Last.fm.
+* **Request System:** Seamlessly search and request music using metadata from MusicBrainz and Deezer.
 * **Authentication:** Secure, admin-managed user creation with JWT token-based login.
 * **Dashboard:** A responsive interface to track request status, recent additions, and server health.
 * **Responsive UI:** Built with React 19 and Tailwind 4 for modern experience on mobile and desktop.
@@ -34,7 +34,7 @@
 
 **Phase 1: MVP (In Progress)**
 * [x] **Authentication:** Admin-managed user creation with JWT token-based login.
-* [ ] **Request System:** Search and request music using metadata from Spotify/Deezer.
+* [ ] **Request System:** Search and request music using metadata from MusicBrainz/Deezer.
 * [ ] **Dashboard:** Responsive UI to track request status.
 * [X] **Infrastructure:** Docker Compose setup with PostgreSQL, Spring Boot, and React.
 
@@ -57,7 +57,7 @@ Overhearr connects your external metadata sources with your internal media libra
 graph LR
     User[User] -->|Request| WebUI[Overhearr Frontend]
     WebUI -->|API| Server[Overhearr Backend]
-    Server -->|Fetch Metadata| Ext[Spotify/MusicBrainz]
+    Server -->|Fetch Metadata| Ext[MusicBrainz/Deezer]
     Server -->|Persist| DB[(PostgreSQL 17)]
     Server -.->|Future: Download| Clients[Lidarr/SpotDL]
 ```
@@ -66,7 +66,6 @@ graph LR
 
 ### Prerequisites
 * Docker & Docker Compose
-* Spotify Developer Client ID/Secret (for metadata fetching)
 
 ### Installation (Docker)
 
@@ -115,8 +114,6 @@ Crucial environment variables for `.env`:
 |----------------------------|-------------------------------------------|
 | `POSTGRES_USER`            | PostgreSQL Username                       |
 | `POSTGRES_PASSWORD`        | PostgreSQL Password                       |
-| `SPOTIFY_CLIENT_ID`        | Your Spotify API Client ID                |
-| `SPOTIFY_CLIENT_SECRET`    | Your Spotify API Secret                   |
 | `APP_SECRET`               | Secret for generated JWT tokens           |
 | `DEFAULT_ADMIN_USERNAME`   | Username for the default admin account    |
 | `DEFAULT_ADMIN_PASSWORD`   | Password for the default admin account    |
